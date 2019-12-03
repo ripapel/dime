@@ -8,12 +8,26 @@ const ProductContainer = styled.div`
     box-shadow: hsl(0, 0%, 80%) 0 0 16px;
     display: flex; 
     flex-direction: column;
-    margin: 10px;
+    margin: 16px;
 `
 
 const ProductImgNavigation = styled.button`
     position: absolute;
     top: 50%;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    
+    &:hover{
+        background-color: rgb(84, 84, 84);
+    }
+`
+
+const ProductImgNavIcon = styled(FontAwesomeIcon)`
+    width: 21px !important;
+    height: 56px;
+    color: hsl(0, 0%, 100%);
+    padding: 6px;
 `
 
 const ProductImgPrevious = styled(ProductImgNavigation)`
@@ -33,8 +47,13 @@ const ProductSection = styled.section`
     position: relative;
 `
 
+const ProductDetailsSection = styled(ProductSection)`
+    padding: 10px;
+`
+
 const ProductName = styled.h3`
-    max-height: 40px;
+    font-size: 15px;
+    margin: 0;
 `
 
 const ProductPrice = styled.div`
@@ -49,18 +68,18 @@ export default class Product extends Component {
         super(props)
         this.state = {
             imgs: ['https://via.placeholder.com/400',
-                'https://via.placeholder.com/400/0000FF/808080?Text=PIC2',
+                'https://via.placeholder.com/400/0000FF/808080',
                 'https://via.placeholder.com/400/0000FF/808080?Text=PIC3'],
             activeImg: 0
         }
     }
 
-    GoTonextImg = () => {
+    goToNextImg = () => {
         const nextImgIndex = this.state.activeImg + 1
         nextImgIndex >= this.state.activeImg ? this.setState({ activeImg: 0 }) : this.setState({ activeImg: nextImgIndex })
     }
 
-    GoToPreviousImg = () => {
+    goToPreviousImg = () => {
         const previousImgIndex = this.state.activeImg - 1
         previousImgIndex < 0 ? this.setState({ activeImg: this.state.imgs.length - 1 }) : this.setState({ activeImg: previousImgIndex })
     }
@@ -70,17 +89,17 @@ export default class Product extends Component {
             <ProductContainer>
                 <ProductSection>
                     <ProductImg src={this.state.imgs[this.state.activeImg]} alt="" />
-                    <ProductImgPrevious>
-                        <FontAwesomeIcon icon={faChevronLeft} />
+                    <ProductImgPrevious onClick={this.goToPreviousImg}>
+                        <ProductImgNavIcon icon={faChevronLeft} />
                     </ProductImgPrevious>
-                    <ProductImgNext>
-                        <FontAwesomeIcon icon={faChevronRight} />
+                    <ProductImgNext onClick={this.goToNextImg}>
+                        <ProductImgNavIcon icon={faChevronRight} />
                     </ProductImgNext>
                 </ProductSection>
-                <ProductSection>
-                    <ProductName>Foo</ProductName>
+                <ProductDetailsSection>
+                    <ProductName>Lorem ipsum dolores sit amet</ProductName>
                     <ProductPrice>${10.00}</ProductPrice>
-                </ProductSection>
+                </ProductDetailsSection>
             </ProductContainer>
         )
     }
