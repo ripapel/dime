@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 const ProductContainer = styled.div`
     background-color: white;
     box-shadow: hsl(0, 0%, 80%) 0 0 16px;
     display: flex; 
     flex-direction: column;
+    margin: 10px;
 `
 
 const ProductImgNavigation = styled.button`
@@ -23,6 +24,10 @@ const ProductImgNext = styled(ProductImgNavigation)`
     right: 0;
 `
 
+const ProductImg = styled.img`
+    width: 100%;
+    height: 100%;
+`
 
 const ProductSection = styled.section`
     position: relative;
@@ -64,12 +69,12 @@ export default class Product extends Component {
         return (
             <ProductContainer>
                 <ProductSection>
-                    <img src={this.state.imgs[this.state.activeImg]} alt="" />
+                    <ProductImg src={this.state.imgs[this.state.activeImg]} alt="" />
                     <ProductImgPrevious>
-                        <FontAwesomeIcon icon={faArrowLeft} />
+                        <FontAwesomeIcon icon={faChevronLeft} />
                     </ProductImgPrevious>
                     <ProductImgNext>
-                        <FontAwesomeIcon icon={faArrowRight} />
+                        <FontAwesomeIcon icon={faChevronRight} />
                     </ProductImgNext>
                 </ProductSection>
                 <ProductSection>
